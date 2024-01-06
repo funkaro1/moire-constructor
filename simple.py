@@ -1,43 +1,46 @@
 import math
-import numpy as np
+
 
 def makeSimpleMoire(Moire):
-    dx = Moire.d
+
+
+    angle = math.radians(Moire.angle)
+    dl = Moire.d
     c = Moire.c
     
+    min_x = -Moire.xsize/2
+    min_y = -Moire.ysize/2
+    max_x = Moire.xsize/2
+    max_y = Moire.ysize/2
+    actual_pos = min_x
+    sinb = math.sin(angle) #So we aren't calculating it every time like a retard
+    cosb = math.cos(angle)
+    c2 = 1/(1/c - sinb/dl) #since dx/(dx/c-1) can be 0 and m = dy/c2
+    paircheck = 1
+
+    points = []
     lines = []
-    xsize = Moire.xsize
-    ysize = Moire.ysize
-    x_min = -xsize/2
-    x_max = xsize/2
-    y_min = -ysize/2
-    y_max = ysize/2
-    angle = Moire.angle
-    angle = math.radians(angle)
-    dy = dx*math.tan(angle)
-    c2 = dx/((dx/c) - 1)
-    m = dy/c2
-    if m < 0:
-        p1 = np.array([x_min ,y_min])
-        p2 = np.array([x_min + c2 ,y_min])
-        p3 = np.array([x_min + c2 +  y_max*2/m ,y_max])
-        p4 = np.array([x_min + y_max*2/m,y_max])
-    else:
-        p1 = np.array([x_min -  y_max*2/m,y_min])
-        p2 = np.array([x_min + c2 - y_max*2/m,y_min])
-        p3 = np.array([x_min + c2 ,y_max])
-        p4 = np.array([x_min ,y_max])
-        
-    while True:
-        if p2[0] >= x_max and p4 [0] >= x_max:
-            lines.append([np.copy(p1),np.copy(p2),np.copy(p3),np.copy(p4)])
-            break 
-        
-        lines.append([np.copy(p1),np.copy(p2),np.copy(p3),np.copy(p4)])
-        p1 += np.array([2*c2,0])
-        p2 += np.array([2*c2,0])
-        p3 += np.array([2*c2,0])
-        p4 += np.array([2*c2,0])
+
+    while actual_pos <= max_x:
+        x_f_max = (cosb*max_y/dl)/(1/c - sinb/dl) + actual_pos  
+        x_f_min = (cosb*min_y/dl)/(1/c - sinb/dl) + actual_pos #elegant as fuck
+
+        actual_pos += c2
+        if actual_pos >= max_x:
+            Moire.last_pos = actual_pos
+
+        pt1 = [x_f_max, max_y]
+        pt2 = [x_f_min, min_y]
+
+        points.append(pt1)
+        points.append(pt2)
+
+        if paircheck == 2:
+            lines.append([pt2, pt1, points[-4], points[-3]]) #order is important
+            paircheck = 0
+
+        paircheck += 1
     
-    Moire.points = lines
-    
+    Moire.poly = lines[:-1]
+    Moire.gap = c2
+    Moire.first_pos = min_x

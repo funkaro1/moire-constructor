@@ -13,7 +13,9 @@ pip install git+https://github.com/funkaro1/moire-constructor.git
 Create a Moire Object: Initialize a moire object with the following parameters:
 
 interference_distance: Distance between two interference lines (in 3D cases, this represents the distance on the surface without distortion).
+
 base_grid_gap: Gap between the lines forming the base grid (the equidistant grid overlaid to create the desired moire pattern).
+
 angle: Angle of the interference lines.
 ```bash
 moire = Moirepattern.Moire(interference_distance, base_grid_gap, angle)

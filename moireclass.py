@@ -32,7 +32,6 @@ class Moire:
         for i in range(self.parts):
             x_size = self.xsize/self.cols
             y_size = self.ysize/self.rows
-            x_pos = (i%self.cols)*x_size
             #create a box with the size of the part
             box = [[-x_size/2,-y_size/2],[-x_size/2,y_size/2],[x_size/2,y_size/2],[x_size/2,-y_size/2]] #ill be adjusting the points positions when some part is added
             #iterate through the lines and check if they intersect with the box
@@ -43,4 +42,22 @@ class Moire:
             to_export = [sublist[0] for sublist in to_export]
             print(to_export)
             svg.export(to_export,x_size,y_size,filename)
-                
+            
+    def export_base(self,filename):
+        c = self.c
+        p1 = [-self.xsize/2,-self.ysize/2]
+        p2 = [-self.xsize/2 + c,-self.ysize/2]
+        p3 = [-self.xsize/2 + c,self.ysize/2]
+        p4 = [-self.xsize/2,self.ysize/2]
+        export = [p1,p2,p3,p4]
+        poly = []
+        while True:
+            poly.append(export)
+            p1 = [p1[0] + 2*c,p1[1]]
+            p2 = [p2[0] + 2*c,p2[1]]
+            p3 = [p3[0] + 2*c,p3[1]]
+            p4 = [p4[0] + 2*c,p4[1]]
+            export = [p1,p2,p3,p4]
+            if p1[0] >= self.xsize/2:
+                break
+        svg.export(poly,self.xsize,self.ysize,filename)

@@ -7,3 +7,4 @@ moire_test.make("Simple")
 print(moire_test.poly)
 
 moire_test.export("test.svg")
+moire_test.export_base("test_base.svg")

@@ -21,26 +21,30 @@ def makeSimpleMoire(Moire):
     points = []
     lines = []
 
-    while actual_pos <= max_x:
+    while True:
         x_f_max = (cosb*max_y/dl)/(1/c - sinb/dl) + actual_pos  
         x_f_min = (cosb*min_y/dl)/(1/c - sinb/dl) + actual_pos #elegant as fuck
 
         actual_pos += c2
-        if actual_pos >= max_x:
-            Moire.last_pos = actual_pos
+        
+            
 
         pt1 = [x_f_max, max_y]
         pt2 = [x_f_min, min_y]
 
         points.append(pt1)
         points.append(pt2)
-
+         
         if paircheck == 2:
             lines.append([pt2, pt1, points[-4], points[-3]]) #order is important
+            if pt2[0] >= max_x:
+                Moire.last_pos = actual_pos
+                break
             paircheck = 0
-
+        
         paircheck += 1
-    
-    Moire.poly = lines[:-1]
+
+        
+    Moire.poly = lines
     Moire.gap = c2
     Moire.first_pos = min_x

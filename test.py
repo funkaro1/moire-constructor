@@ -1,4 +1,4 @@
-import Moirepattern as mc
+from Moirepattern import moireclass as mc
 
 # Create a new Moire object
 moire_test = mc.Moire(15,1,181)

@@ -1,7 +1,6 @@
-import simple
-import bool
-import svgexport as svg
-
+from . import simple
+from . import bool
+from . import svgexport as svg
 #Moire class
 class Moire:
     def __init__(self,d,c,angle):

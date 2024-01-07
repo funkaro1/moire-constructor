@@ -1,24 +1,55 @@
-#Moirepattern
+# Moirepattern
 
-Moirepattern is a python library that allows the user to construct moire patterns on the fly.
-CURRENTLY JUST SUPPORTING SIMPLE MOIRE PATTERNS CREATING, THATS MEAN, YOU CAN ONLY USE IT FOR MAKING INTERFECENCE PATTERNS CONTROLLING THE ANGLE AND DISTANCE BETWEEN INTERFERENCES
+Moirepattern is a Python library that enables the creation of moire patterns in real-time. At the moment, it focuses on generating simple moire patterns by controlling the angle and distance between interferences.
 
-Currently, to use it, please use:
+## Installation
 
+You can install Moirepattern via pip using the following command:
+
+```bash
 pip install git+https://github.com/funkaro1/moire-constructor.git
+```
+## Creating Moire Patterns
+Create a Moire Object: Initialize a moire object with the following parameters:
 
-then you can import Moirepattern using:
+interference_distance: Distance between two interference lines (in 3D cases, this represents the distance on the surface without distortion).
+base_grid_gap: Gap between the lines forming the base grid (the equidistant grid overlaid to create the desired moire pattern).
+angle: Angle of the interference lines.
+```bash
+moire = Moirepattern.Moire(interference_distance, base_grid_gap, angle)
+```
+Set Size: Define the size of the moire pattern using set_size(x_size, y_size)
 
-import Moirepattern
+```bash
+moire.set_size(x_size, y_size)
+```
+Create Moire Pattern: Generate the moire pattern by specifying the interference type. Currently, only "simple" interference is supported.
+```bash
+moire.make("simple")
+```
+## Exporting Results
+You can export the generated moire pattern and the base grid:
 
-Next, you can create a moire object using Moire(interference_distance, base_grid_gap, angle)
+export(filename): Export the moire pattern to a file.
 
-Where interference distance is the distance between 2 interference lines (in 3d cases, this represent the distance of the interferences on the surface, without distortion), base_grid_gap correspond to the gap between the lines that conforms the base grid (that is, the equidistant grid that is superimposted to create the desired moiré pattern, and angle is the angle of the interference lines.
+export_base(filename): Export the base grid to a file.
 
-After creating a moiré object, size must be defined using set_size(x_size, y_size)
+## Accessing Lines
+Access the lines generated in the moire pattern using the .poly attribute, which returns an array containing arrays of points defining each line.
 
-Finally, the moiré pattern must be created using make(Moire_type), where Moire_type is an sting containing the type of interference that would be created. Currently, just "simple" interference can be used.
+```bash
+lines = moire.poly
+```
+## Example Usage
+```bash
+import Moirepattern as mp
 
-For exporting the result, you can use export(filename) and export_base(filename)
+moire = mp.Moire(10, 5, 30)
+moire.set_size(800, 600)
+moire.make("simple")
+moire.export("moire_pattern.svg")
+moire.export_base("base_grid.svg")
 
-Also, the lines can be accessed using .poly on the moiré object. It returns an array with arrays containing the points that conforms a line.
+lines = moire.poly
+print(lines)
+```

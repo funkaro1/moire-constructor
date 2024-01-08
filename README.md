@@ -15,11 +15,11 @@ pip install git+https://github.com/funkaro1/moire-constructor.git
 
 Initialize a moire object with the following parameters:
 
--interference_distance: Distance between two interference lines (in 3D cases, this represents the distance on the surface without distortion).
+- interference_distance: Distance between two interference lines (in 3D cases, this represents the distance on the surface without distortion).
 
--base_grid_gap: Gap between the lines forming the base grid (the equidistant grid overlaid to create the desired moire pattern).
+- base_grid_gap: Gap between the lines forming the base grid (the equidistant grid overlaid to create the desired moire pattern).
 
--angle: Angle of the interference lines.
+- angle: Angle of the interference lines.
 
 ```bash
 moire = Moirepattern.Moire(interference_distance, base_grid_gap, angle)
@@ -44,9 +44,9 @@ moire.make("simple")
 
 You can export the generated moire pattern and the base grid:
 
--export(filename): Export the moire pattern to a file.
+- export(filename): Export the moire pattern to a file.
 
--export_base(filename): Export the base grid to a file.
+- export_base(filename): Export the base grid to a file.
 
 ## Accessing Lines
 

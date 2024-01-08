@@ -1,6 +1,7 @@
 from . import simple
 from . import bool
 from . import svgexport as svg
+from . import visualizator as vis
 #Moire class
 class Moire:
     def __init__(self,d,c,angle):
@@ -8,6 +9,7 @@ class Moire:
         self.c = c
         self.angle = angle
         self.poly = []
+        self.base = []
         self.type = ""
         self.parts = 1
         self.structure = [1] #this will be a matrix with the shape of the structure; Zeroes in every pos unless is the corresponding part
@@ -25,6 +27,24 @@ class Moire:
             simple.makeSimpleMoire(self)
         else:
             print("Not implemented yet // Not a valid type")
+    
+    def base_make(self):
+        c = self.c
+        p1 = [-self.xsize/2,-self.ysize/2]
+        p2 = [-self.xsize/2 + c,-self.ysize/2]
+        p3 = [-self.xsize/2 + c,self.ysize/2]
+        p4 = [-self.xsize/2,self.ysize/2]
+        export = [p1,p2,p3,p4]
+        self.base = []
+        while True:
+            self.base.append(export)
+            p1 = [p1[0] + 2*c,p1[1]]
+            p2 = [p2[0] + 2*c,p2[1]]
+            p3 = [p3[0] + 2*c,p3[1]]
+            p4 = [p4[0] + 2*c,p4[1]]
+            export = [p1,p2,p3,p4]
+            if p1[0] >= self.xsize/2:
+                break
             
     def export(self,filename):
         to_export = []
@@ -39,24 +59,13 @@ class Moire:
                 if bool.intersect(line,box)[0]:
                     to_export.append(bool.intersect(line,box))
             to_export = [sublist[0] for sublist in to_export]
-            print(to_export)
+            
             svg.export(to_export,x_size,y_size,filename)
             
     def export_base(self,filename):
-        c = self.c
-        p1 = [-self.xsize/2,-self.ysize/2]
-        p2 = [-self.xsize/2 + c,-self.ysize/2]
-        p3 = [-self.xsize/2 + c,self.ysize/2]
-        p4 = [-self.xsize/2,self.ysize/2]
-        export = [p1,p2,p3,p4]
-        poly = []
-        while True:
-            poly.append(export)
-            p1 = [p1[0] + 2*c,p1[1]]
-            p2 = [p2[0] + 2*c,p2[1]]
-            p3 = [p3[0] + 2*c,p3[1]]
-            p4 = [p4[0] + 2*c,p4[1]]
-            export = [p1,p2,p3,p4]
-            if p1[0] >= self.xsize/2:
-                break
-        svg.export(poly,self.xsize,self.ysize,filename)
+        self.base_make()
+        svg.export(self.base,self.xsize,self.ysize,filename)
+        
+    def view(self):
+        vis.visualize(self)
+        

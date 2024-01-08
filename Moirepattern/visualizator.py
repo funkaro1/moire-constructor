@@ -15,21 +15,22 @@ def visualize(Moire):
     app = QApplication(sys.argv)
     scene = QGraphicsScene()
 
-    # Crear objetos QGraphicsSvgItem para los SVG
+   
     item_bg = QGraphicsSvgItem(background.name)
     item_fg = QGraphicsSvgItem(foreground.name)
+#center
+    item_bg.setPos(-item_bg.boundingRect().width() / 2, -item_bg.boundingRect().height() / 2)
+    item_fg.setPos(-item_fg.boundingRect().width() / 2, -item_fg.boundingRect().height() / 2)
 
-    # Añadir los QGraphicsSvgItem a la escena
     scene.addItem(item_bg)
     scene.addItem(item_fg)
-
-    # Configurar las banderas para el elemento de primer plano
+ 
     item_fg.setFlag(QGraphicsItem.ItemIsMovable)
     item_fg.setFlag(QGraphicsItem.ItemIsSelectable)
 
     view = QGraphicsView(scene)
     view.show()
-
-    sys.exit(app.exec_())
     background.close()
     foreground.close()
+    sys.exit(app.exec_())
+    

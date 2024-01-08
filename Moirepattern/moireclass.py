@@ -2,6 +2,7 @@ from . import simple
 from . import bool
 from . import svgexport as svg
 from . import visualizator as vis
+from . import cylinder as cyl
 #Moire class
 class Moire:
     def __init__(self,d,c,angle):
@@ -25,6 +26,9 @@ class Moire:
         self.type = type
         if self.type == "Simple":
             simple.makeSimpleMoire(self)
+        elif self.type == "Cylinder":
+            print(min(self.xsize,self.ysize)/2)
+            self.poly = cyl.conform(min(self.xsize,self.ysize)/2,self.d,self.c)
         else:
             print("Not implemented yet // Not a valid type")
     
@@ -56,7 +60,7 @@ class Moire:
             #iterate through the lines and check if they intersect with the box
             #if they do, add the intersection points to the list
             for line in self.poly:
-                if bool.intersect(line,box)[0]:
+                if bool.intersect(line,box)[0] != False:
                     to_export.append(bool.intersect(line,box))
             to_export = [sublist[0] for sublist in to_export]
             

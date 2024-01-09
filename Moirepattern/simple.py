@@ -1,17 +1,17 @@
 import math
 
 
-def makeSimpleMoire(Moire):
+def makeSimpleMoire(Moire, extra = 1):
 
 
     angle = math.radians(Moire.angle)
     dl = Moire.d
     c = Moire.c
     
-    min_x = -Moire.xsize/2
-    min_y = -Moire.ysize/2
-    max_x = Moire.xsize/2
-    max_y = Moire.ysize/2
+    min_x = extra * -Moire.xsize/2
+    min_y = extra * -Moire.ysize/2
+    max_x = extra * Moire.xsize/2
+    max_y = extra * Moire.ysize/2
     actual_pos = min_x
     sinb = math.sin(angle) #So we aren't calculating it every time like a retard
     cosb = math.cos(angle)
@@ -20,7 +20,7 @@ def makeSimpleMoire(Moire):
     
     points = []
     lines = []
-    
+    Moire.first_pos = actual_pos
     while True:
         x_f_max = (cosb*max_y/dl)/(1/c - sinb/dl) + actual_pos  
         x_f_min = (cosb*min_y/dl)/(1/c - sinb/dl) + actual_pos #elegant as fuck

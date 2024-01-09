@@ -2,7 +2,17 @@ def write(fp, points):
     if not points:
         return
     
-    x, y = points[0]
+    if isinstance(points, (list, tuple)):
+        pass
+    else:
+        
+        return
+    if len(points) > 2:
+        
+        x, y = points[0]
+    else:
+       
+        return
     data = 'M{},{} ' .format(x, y)
     for p in points[1:]:
         x, y = p
@@ -18,6 +28,6 @@ def export(geo, xsize, ysize, filename):
         fp.write('<defs>\n')
         fp.write('</defs>\n')
         for points in geo:
-            print(points)
+            
             write(fp, points)   
         fp.write('</svg>')

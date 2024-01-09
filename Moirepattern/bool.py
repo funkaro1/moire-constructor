@@ -7,4 +7,9 @@ def intersect(a, b): #lets define that b is always the box
     if poly1.intersects(poly2) == False:
         return [False]        
     else:
-        return [list(intersection.exterior.coords)]
+        if intersection.geom_type == 'Polygon':
+            return [list(intersection.exterior.coords)]
+        elif intersection.geom_type == 'Point':
+            return [False]
+        else:
+            return [False]  # o manejar de otra manera

@@ -201,7 +201,7 @@ class Moire:
         self.is_comp = True
         self.gap = other.gap #store the last c2
         
-    def add_compound(self,other, extra = 1.2):
+    def add_compound(self,other, extra = 1.6):
         print("comp")
         print(self.last_pos)
         last_pos = self.last_pos

@@ -23,6 +23,11 @@ moire_test5 = mc.Moire(100, 5, -20) #already fixed
 moire_test5.setsize(1000,1000)
 moire_test5.make("Simple")
 moire_test.add_compound(moire_test5)
+moire_test6 = mc.Moire(100, 5, -20) #already fixed
+moire_test6.setsize(1000,1000)
+moire_test6.make("Simple")
+moire_test.add_compound(moire_test6)
+
 
 print("4")
 moire_test.export("test2.svg")

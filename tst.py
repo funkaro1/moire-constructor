@@ -1,5 +1,4 @@
-import moire
-import vis
+import Moirepattern as moire
 
 test = moire.Structure(0.5)
 test2 = moire.Structure(0.5)

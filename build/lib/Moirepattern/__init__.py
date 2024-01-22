@@ -1,1 +1,1 @@
-from moire import Structure
+from .moire import Structure

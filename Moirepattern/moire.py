@@ -1,8 +1,9 @@
 
-import constructor as cns
-import svgop as svg
-import vis
-import math
+from . import constructor as cns
+from . import svgop as svg
+from . import vis
+from . import math
+
 class Structure:
     def __init__(self,c):
         self.components = [] #Component is a moiré pattern

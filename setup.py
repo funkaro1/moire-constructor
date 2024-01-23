@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='Moirepattern',
-    version='0.1.0a1',
+    version='0.1.0a2',
     packages=find_packages(),
     description='A lib to generate Moire patterns',
     author='IE Barrera',

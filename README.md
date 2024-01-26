@@ -1,3 +1,7 @@
+https://www.youtube.com/watch?v=SHc9ggIxdHQ
+
+OUTDATED README (TODO -> update readme) Please watch the video. 
+
 # Moirepattern
 
 Moirepattern is a Python library that enables the creation of moire patterns. Currently, it can generate simple moire patterns by controlling the angle and distance between interferences, and these can be added to form new moire patterns. Additionally, cylinder-shaped moire patterns are supported. In the future, it is planned to have construction operations that would allow the user to make any shape, in 2 or 3 dimensions, and several predefined geometries.
